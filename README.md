@@ -7,5 +7,4 @@ The system sends the full review dataset to an AI model, which behaves like a fi
 The goal is to reveal what kinds of stories, emotions, genres, and cinematic themes the user is naturally drawn to over time.
 I have used React , Tailwindcss, vite openrouter , and OMDB to make this project.
 it has some interesting features like when the user has added the name of a movie the official poster will be appeared automatically.
-GitHub link:
-# AI-movie-analyzer
+GitHub link:https://github.com/Roqiastanikzai/AI-movie-analyzer
