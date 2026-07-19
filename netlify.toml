@@ -1,6 +1,0 @@
-[build]
-command = "npm run build"
-publish = "dist"
-[build.environment]
-VITE_OMDB_API_KEY="$VITE_OMDB_API_KEY"
-VITE_OPENROUTER_KEY="$VITE_OPENROUTER_KEY"
