@@ -8,3 +8,4 @@ The goal is to reveal what kinds of stories, emotions, genres, and cinematic the
 I have used React , Tailwindcss, vite openrouter , and OMDB to make this project.
 it has some interesting features like when the user has added the name of a movie the official poster will be appeared automatically.
 GitHub link:https://github.com/Roqiastanikzai/AI-movie-analyzer
+live demo link:https://6a5c84b82d319b760e5dfd46--boisterous-cocada-e80f69.netlify.app/
