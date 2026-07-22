@@ -12,15 +12,25 @@ function Navbar() {
                         <h1 className="text-2xl md:text-3xl font-extrabold bg-gradient-to-r from-red-400 via-yellow-400 to-yellow-300 bg-clip-text text-transparent tracking-wide">
                             AI Movie Analyzer
                         </h1>
-                        <p className="text-gray-300 text-sm">Personality</p>
+                        
+                    
                     </div>
                 </div>
-
-                <ul className="hidden md:flex items-center gap-8 text-gray-300 font-medium">
-                    <li className="cursor-pointer hover:text-yellow-400 transition duration-300">Home</li>
-                    <li className="cursor-pointer hover:text-yellow-400 transition duration-300">My Movies</li>
-                    <li className="cursor-pointer hover:text-yellow-400 transition duration-300">AI analysis</li>
-                </ul>
+                <li>
+                    <a href="#home" className="cursor-pointer hover:text-yellow-400 transition duration-300">
+                        Home
+                    </a>
+                </li>
+                 <li>
+                    <a href="#movies" className="cursor-pointer hover:text-yellow-400 transition duration-300">
+                        My Movies
+                    </a>
+                </li>
+                 <li>
+                    <a href="#analysis" className="cursor-pointer hover:text-yellow-400 transition duration-300">
+                        AI Analysis
+                    </a>
+                </li>
             </div>
         </nav>
     );

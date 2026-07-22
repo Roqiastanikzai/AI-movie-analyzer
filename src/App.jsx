@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 import MovieForm from "../components/MovieForm";
 import SearchBar from "../components/SearchBar";
 import MovieList from "../components/MovieList";
-import { analyzeMovies } from "../components/pages/services/openRouter";
+import { analyzeMovies } from "./openRouter";
 
 function App() {
   const [movies, setMovies] = useState(() => {
@@ -60,8 +60,8 @@ function App() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      <Navbar />
-      <div className="max-w-6xl mx-auto px-6 py-8">
+       <Navbar />
+      <div id="home" className="max-w-6xl mx-auto px-6 py-8">
         <MovieForm onAddMovie={addMovie} />
         <SearchBar searchTerm={searchTerm} onSearch={setSearchTerm} />
         <div className="flex justify-center my-6">
@@ -73,23 +73,35 @@ function App() {
             {isAnalyzing ? "Analyzing..." : "Analyze My Taste"}
           </button>
         </div>
-        <MovieList movies={filteredMovies} deleteMovie={deleteMovie} />
-        {analysis && (
+        <div id="movies">
+<MovieList movies={filteredMovies} deleteMovie={deleteMovie} />
+</div>
+         <div id="analysis">{analysis && (
           <div className="mt-10 bg-zinc-900 p-6 rounded-xl border border-red-400/70 shadow-lg shadow-red-500/20">
             <h2 className="text-3xl font-bold text-red-300 mb-4">
               Your Movie Personality
             </h2>
             <p>{analysis}</p>
           </div>
+
         )}
+        </div>
         <footer className="mt-10 border-t border-red-400/20 py-6 text-center">
-          <p className="text-sm font-semibold tracking-wide text-red-300/90 drop-shadow-[0_0_10px_rgba(255,107,53,0.35)]">
-            Developed and designed by Roqia Stanikzai
+        <h3 className="text-lg font-bold test-red-300">Contact Information</h3>
+          <p className="mt-2">
+         Developed and designed by <strong> Roqia Stanikzai </strong>           
+          </p>
+          <p>Email: <a
+          href="mailto:roqiastanikzai5@gmail.com" className="text-yellow-400 hover:underline">roqiastanikzai5@gmail.com</a>
+          </p>
+          <p>Phone:
+            <a href="tel:0764927235" className="text-yellow-400 hover:underline">0764927235</a>
           </p>
         </footer>
       </div>
-    </div>
+      </div>
   );
+  
 }
 
 export default App;
