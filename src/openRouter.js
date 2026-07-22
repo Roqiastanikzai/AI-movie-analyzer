@@ -35,7 +35,7 @@ export async function analyzeMovies(movies) {
          ]
         }`;
         // 2. Safely read your configured keys
-        const apiKey  = import.meta.env.VITE_OPENROUTER_API_KEY || "sk-or-v1-f8e4f99ca350e25d88ed14575723154acbc44720d41269ad510a2d3a4cc936";
+        const apiKey  = import.meta.env.VITE_OPENROUTER_API_KEY 
         console.log(apiKey);
         // 3. Post to the correct operational backend endpoint path 
         const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
