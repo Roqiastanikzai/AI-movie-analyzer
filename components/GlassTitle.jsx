@@ -62,13 +62,30 @@ function GlassTitle() {
   return (
     <h2
       ref={titleRef}
-      className="text-5xl md:text-7xl font-black leading-tight max-w-5xl mx-auto text-center"
+      className="text-5xl md:text-7xl font-black leading-tight max-w-5xl mx-auto text-center flex flex-col items-center justify-center gap-2"
     >
-      Decode Your{" "}
-      <span className="bg-gradient-to-r from-red-400 via-purple-400 to-yellow-400 bg-clip-text text-transparent">
-        Movie Personality
-      </span>{" "}
-      with AI
+     <div>Decode Your</div>
+     {/*Buklletproof SVG Gradient Text */}
+     <svg className="w-full h-[1.2rem] max-h-[85px]" viewBox="0 0 800 90">
+        <defs>
+            <linearGradient id="movieGradient" x1="0%" y1="0%" x2="100%" y2="100%" y2="0%">
+                <stop offset="0%" stopColor="#f87171" /> {/*red-400 */}
+                <stop offset="50%" stopColor="#c084fc" /> {/*purple-400 */}
+                <stop offset="100%" stopColor="#facc15" /> {/*yellow-400 */}
+            </linearGradient>
+        </defs>
+        <text
+        x="50%"
+        y="70"
+        textAnchor="midddle"
+        fill="url(#movieGrdaient)"
+        className="font-black text-6xl md:text-7xl"
+        style={{fontFamily:'inherit'}}>
+          <div>Movie Personality </div>  
+        </text>
+     </svg>
+     <div>With AI</div>
+     
     </h2>
   );
 }
