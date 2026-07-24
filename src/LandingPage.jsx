@@ -9,9 +9,14 @@ import {
 } from "react-icons/fa";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
 import GlassTitle from "../components/GlassTitle";
 
 function LandingPage({ onEnterApp }) {
+  const [showFeatures, setShowFeatures] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
+  const [showContact, setShowContact] = useState(false);
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#020617] text-white">
 
@@ -19,7 +24,6 @@ function LandingPage({ onEnterApp }) {
 
       <div className="absolute inset-0 overflow-hidden">
 
-        {/* Red Glow */}
         <motion.div
           animate={{
             scale: [1, 1.2, 1],
@@ -32,7 +36,6 @@ function LandingPage({ onEnterApp }) {
           className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-red-500 blur-[170px]"
         />
 
-        {/* Purple Glow */}
         <motion.div
           animate={{
             scale: [1.2, 1, 1.2],
@@ -45,7 +48,6 @@ function LandingPage({ onEnterApp }) {
           className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full bg-purple-600 blur-[180px]"
         />
 
-        {/* Yellow Glow */}
         <motion.div
           animate={{
             scale: [1, 1.3, 1],
@@ -131,19 +133,17 @@ function LandingPage({ onEnterApp }) {
           </div>
 
           <motion.button
-            whileHover={{
-              scale: 1.05,
-            }}
-            whileTap={{
-              scale: 0.95,
-            }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={onEnterApp}
             className="px-6 py-3 rounded-full border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/10 transition"
           >
             Sign In
           </motion.button>
 
-        </header>        {/* ================= Hero Section ================= */}
+        </header>
+
+        {/* ================= Hero Section ================= */}
 
         <main className="flex-1 flex flex-col items-center justify-center px-6 text-center">
 
@@ -155,20 +155,16 @@ function LandingPage({ onEnterApp }) {
             transition={{ duration: 0.8 }}
             className="mb-10"
           >
-
             <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl shadow-lg">
-
               <FaRobot className="text-purple-400" />
 
               <span className="text-slate-300 font-medium">
                 Powered by Advanced Artificial Intelligence
               </span>
-
             </div>
-
           </motion.div>
 
-          {/* Interactive Title */}
+          {/* Glass Title */}
 
           <motion.div
             initial={{ opacity: 0, y: 70 }}
@@ -189,9 +185,7 @@ function LandingPage({ onEnterApp }) {
             Build your personal movie collection, receive intelligent
             recommendations, discover hidden patterns in your taste,
             and let AI reveal your unique cinematic personality.
-          </motion.p>
-
-          {/* Buttons */}
+          </motion.p>          {/* ================= Buttons ================= */}
 
           <div className="flex flex-col sm:flex-row gap-6 mt-12">
 
@@ -205,22 +199,16 @@ function LandingPage({ onEnterApp }) {
               onClick={onEnterApp}
               className="relative px-10 py-5 rounded-2xl bg-gradient-to-r from-red-500 via-purple-500 to-yellow-500 font-bold text-lg shadow-2xl"
             >
-
               <div className="flex items-center gap-3">
-
                 <FaPlay />
-
                 Launch Workspace
-
                 <FaArrowRight />
-
               </div>
-
             </motion.button>
 
             <motion.button
               whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: .95 }}
+              whileTap={{ scale: 0.95 }}
               className="px-10 py-5 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl font-semibold"
             >
               Learn More
@@ -228,7 +216,7 @@ function LandingPage({ onEnterApp }) {
 
           </div>
 
-          {/* Statistics */}
+          {/* ================= Statistics ================= */}
 
           <motion.div
             initial={{ opacity: 0 }}
@@ -239,51 +227,32 @@ function LandingPage({ onEnterApp }) {
           >
 
             <div>
-              <h2 className="text-4xl font-black text-red-400">
-                10K+
-              </h2>
-
-              <p className="text-slate-400 mt-2">
-                Movies Tracked
-              </p>
+              <h2 className="text-4xl font-black text-red-400">10K+</h2>
+              <p className="text-slate-400 mt-2">Movies Tracked</p>
             </div>
 
             <div>
-              <h2 className="text-4xl font-black text-purple-400">
-                98%
-              </h2>
-
-              <p className="text-slate-400 mt-2">
-                AI Accuracy
-              </p>
+              <h2 className="text-4xl font-black text-purple-400">98%</h2>
+              <p className="text-slate-400 mt-2">AI Accuracy</p>
             </div>
 
             <div>
-              <h2 className="text-4xl font-black text-yellow-400">
-                500+
-              </h2>
-
-              <p className="text-slate-400 mt-2">
-                Recommendations
-              </p>
+              <h2 className="text-4xl font-black text-yellow-400">500+</h2>
+              <p className="text-slate-400 mt-2">Recommendations</p>
             </div>
 
             <div>
-              <h2 className="text-4xl font-black text-cyan-400">
-                24/7
-              </h2>
-
-              <p className="text-slate-400 mt-2">
-                AI Assistant
-              </p>
+              <h2 className="text-4xl font-black text-cyan-400">24/7</h2>
+              <p className="text-slate-400 mt-2">AI Assistant</p>
             </div>
 
           </motion.div>
 
-          {/* Features */}
+          {/* ================= Features ================= */}
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-28 w-full max-w-6xl">
-                        {/* Feature Card 1 */}
+
+            {/* Feature 1 */}
 
             <motion.div
               whileHover={{
@@ -295,7 +264,6 @@ function LandingPage({ onEnterApp }) {
               transition={{ type: "spring", stiffness: 250 }}
               className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 shadow-2xl"
             >
-
               <div className="w-16 h-16 rounded-2xl bg-red-500/20 flex items-center justify-center text-red-400 text-2xl mb-6">
                 <FaFilm />
               </div>
@@ -306,13 +274,12 @@ function LandingPage({ onEnterApp }) {
 
               <p className="text-slate-400 leading-relaxed">
                 Organize your favorite movies into one beautiful library.
-                Instantly search, edit, rate, and manage every film you've
-                watched with an elegant interface.
+                Instantly search, edit, rate and manage every film you've
+                watched with a clean, elegant interface.
               </p>
-
             </motion.div>
 
-            {/* Feature Card 2 */}
+            {/* Feature 2 */}
 
             <motion.div
               whileHover={{
@@ -324,7 +291,6 @@ function LandingPage({ onEnterApp }) {
               transition={{ type: "spring", stiffness: 250 }}
               className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 shadow-2xl"
             >
-
               <div className="w-16 h-16 rounded-2xl bg-purple-500/20 flex items-center justify-center text-purple-400 text-2xl mb-6">
                 <FaBrain />
               </div>
@@ -334,14 +300,13 @@ function LandingPage({ onEnterApp }) {
               </h3>
 
               <p className="text-slate-400 leading-relaxed">
-                Discover hidden viewing habits, personality traits,
-                favorite genres, storytelling preferences, and receive
-                intelligent recommendations generated by AI.
+                Discover hidden viewing habits, favorite genres,
+                personality traits and receive intelligent movie
+                recommendations generated by AI.
               </p>
-
             </motion.div>
 
-            {/* Feature Card 3 */}
+            {/* Feature 3 */}
 
             <motion.div
               whileHover={{
@@ -353,7 +318,6 @@ function LandingPage({ onEnterApp }) {
               transition={{ type: "spring", stiffness: 250 }}
               className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 shadow-2xl"
             >
-
               <div className="w-16 h-16 rounded-2xl bg-yellow-500/20 flex items-center justify-center text-yellow-400 text-2xl mb-6">
                 <FaMagic />
               </div>
@@ -364,15 +328,14 @@ function LandingPage({ onEnterApp }) {
 
               <p className="text-slate-400 leading-relaxed">
                 Enjoy a premium interface inspired by modern streaming
-                platforms with smooth animations, beautiful gradients,
-                glassmorphism, and responsive design.
+                platforms with beautiful gradients, glassmorphism and
+                smooth animations.
               </p>
-
             </motion.div>
 
           </div>
 
-          {/* Why Choose Us */}
+          {/* ================= Why Choose Us ================= */}
 
           <motion.div
             initial={{ opacity: 0 }}
@@ -381,7 +344,6 @@ function LandingPage({ onEnterApp }) {
             viewport={{ once: true }}
             className="mt-28 max-w-5xl text-center"
           >
-
             <h2 className="text-4xl md:text-5xl font-black mb-6">
               Why Choose
               <span className="bg-gradient-to-r from-red-400 via-purple-400 to-yellow-400 bg-clip-text text-transparent">
@@ -390,12 +352,13 @@ function LandingPage({ onEnterApp }) {
             </h2>
 
             <p className="text-slate-400 text-lg leading-relaxed">
-              Experience movie tracking in an entirely new way. Analyze
-              your cinematic personality, organize your watchlist, and
-              receive recommendations tailored specifically to your taste.
+              Experience movie tracking in an entirely new way.
+              Analyze your cinematic personality, organize your
+              watchlist and receive recommendations tailored
+              specifically to your taste.
             </p>
 
-          </motion.div>          {/* Final CTA */}
+          </motion.div>          {/* ================= Final CTA ================= */}
 
           <motion.section
             initial={{ opacity: 0, y: 80 }}
@@ -420,8 +383,8 @@ function LandingPage({ onEnterApp }) {
 
                 <p className="text-slate-300 max-w-3xl mx-auto text-lg leading-relaxed mb-10">
                   Join thousands of movie lovers who are organizing their
-                  collections, receiving AI-powered recommendations, and
-                  discovering hidden patterns in their movie taste.
+                  collections, receiving AI-powered recommendations,
+                  and discovering hidden patterns in their movie taste.
                 </p>
 
                 <motion.button
@@ -434,9 +397,7 @@ function LandingPage({ onEnterApp }) {
                   className="px-12 py-5 rounded-2xl bg-gradient-to-r from-red-500 via-purple-500 to-yellow-500 text-lg font-bold shadow-2xl inline-flex items-center gap-3"
                 >
                   <FaPlay />
-
                   Launch AI Workspace
-
                   <FaArrowRight />
                 </motion.button>
 
@@ -447,7 +408,7 @@ function LandingPage({ onEnterApp }) {
 
         </main>
 
-        {/* Footer */}
+        {/* ================= Footer ================= */}
 
         <footer className="mt-24 border-t border-white/10">
 
@@ -467,27 +428,133 @@ function LandingPage({ onEnterApp }) {
 
             <div className="flex gap-8 text-slate-400">
 
-              <span className="hover:text-white cursor-pointer transition">
-                Features
-              </span>
+              {/* Features */}
 
-              <span className="hover:text-white cursor-pointer transition">
-                About
-              </span>
+              <div className="relative inline-block">
 
-              <span className="hover:text-white cursor-pointer transition">
-                Contact
-              </span>
+                <span
+                  onClick={() => setShowFeatures(!showFeatures)}
+                  className="hover:text-white cursor-pointer transition select-none"
+                >
+                  Features
+                </span>
+
+                {showFeatures && (
+
+                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 p-4 bg-slate-900/95 backdrop-blur-md border border-white/10 rounded-xl shadow-2xl text-xs min-w-[250px] flex flex-col gap-2 text-left z-50">
+
+                    <div className="font-semibold text-purple-400 border-b border-white/5 pb-2 text-center">
+                      App Features
+                    </div>
+
+                    <p>
+                      <strong className="text-slate-200">
+                        AI Personality:
+                      </strong>{" "}
+                      Learns your movie taste using AI.
+                    </p>
+
+                    <p>
+                      <strong className="text-slate-200">
+                        Smart Collection:
+                      </strong>{" "}
+                      Organize all your favorite movies.
+                    </p>
+
+                    <p>
+                      <strong className="text-slate-200">
+                        Pattern Finder:
+                      </strong>{" "}
+                      Discover hidden trends in your watch history.
+                    </p>
+
+                  </div>
+
+                )}
+
+              </div>
+
+              {/* About */}
+
+              <div className="relative inline-block">
+
+                <span
+                  onClick={() => setShowAbout(!showAbout)}
+                  className="hover:text-white cursor-pointer transition select-none"
+                >
+                  About
+                </span>
+
+                {showAbout && (
+
+                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 p-4 bg-slate-900/95 backdrop-blur-md border border-white/10 rounded-xl shadow-2xl text-xs min-w-[260px] text-center z-50">
+
+                    <div className="font-semibold text-purple-400 border-b border-white/5 pb-2 mb-2">
+                      About This App
+                    </div>
+
+                    <p className="text-slate-300 leading-relaxed">
+                      AI Movie Analyzer uses artificial intelligence to
+                      understand your movie preferences, identify your
+                      favorite genres, and recommend films that match
+                      your unique cinematic personality.
+                    </p>
+
+                  </div>
+
+                )}
+
+              </div>              {/* Contact */}
+
+              <div className="relative inline-block">
+
+                <span
+                  onClick={() => setShowContact(!showContact)}
+                  className="hover:text-white cursor-pointer transition select-none"
+                >
+                  Contact
+                </span>
+
+                {showContact && (
+
+                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 p-4 bg-slate-900/95 backdrop-blur-md border border-white/10 rounded-xl shadow-2xl text-xs min-w-[240px] text-center z-50">
+
+                    <div className="font-semibold text-purple-400 border-b border-white/5 pb-2 mb-2">
+                      Get in Touch
+                    </div>
+
+                    <a
+                      href="mailto:roqiastanikzai5@gmail.com"
+                      className="block text-slate-200 hover:text-purple-400 hover:underline break-all transition"
+                    >
+                      roqiastanikzai5@gmail.com
+                    </a>
+
+                    <a
+                      href="tel:0764927235"
+                      className="block mt-2 text-slate-300 hover:text-white hover:underline transition"
+                    >
+                      0764927235
+                    </a>
+
+                  </div>
+
+                )}
+
+              </div>
 
             </div>
 
           </div>
 
+          {/* Copyright */}
+
           <div className="border-t border-white/10 py-6 text-center text-slate-500 text-sm">
 
-            © {new Date().getFullYear()} AI Movie Analyzer • Designed by
+            © {new Date().getFullYear()} AI Movie Analyzer • Designed by{" "}
+
             <span className="text-yellow-400 font-semibold">
-              {" "}Roqia Stanikzai
+              Roqia Stanikzai
             </span>
 
           </div>
