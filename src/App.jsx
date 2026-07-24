@@ -4,10 +4,11 @@ import Footer from"../components/Footer";
 import MovieForm from "../components/MovieForm";
 import SearchBar from "../components/SearchBar";
 import MovieList from "../components/MovieList";
+import LandingPage from "./LandingPage";
 import { analyzeMovies } from "./openRouter";
 
 function App() {
-  
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [movies, setMovies] = useState(() => {
     try {
       const raw = localStorage.getItem("movies");
@@ -29,7 +30,7 @@ function App() {
   }, [movies]);
 
   const addMovie = (movie) => {
-    setMovies((prev) => [...prev, { ...movie, id: Data.now().toString() }]);
+    setMovies((prev) => [...prev, { ...movie, id: Date.now().toString() }]);
   };
 
   const deleteMovie = (id) => {
@@ -58,13 +59,16 @@ function App() {
     }
   };
 // Fixed Structural Return and Correct Layout Framing
+if (!isLoggedIn) {
+  return <LandingPage onEnterApp={() => setIsLoggedIn(true)} />;
+}
   return (
     <div className="min-h-screen bg-slate-950 text-white flex flex-col justify-between">
       {/*3D Multi-color Navbar sitting firmly at the top edge */}
        <Navbar />
        {/*Main Structural Content Workspace Grid */}
        <main className="max-w-6xl mx-auto px-6 py-8 flex-grow w-full flex flex-col gap-6">
-<div id="home">
+        <div id="home">
         <MovieForm onAddMovie={addMovie} />
         <SearchBar searchTerm={searchTerm} onSearch={setSearchTerm} />
         </div>
@@ -91,6 +95,7 @@ function App() {
           </div>
 )}
 </main>
+{/* Fixed: Proper JSX comment block syntaxused here */}
 {/*High-Contrast Opaque Matching Footer sitting at the bottom edge */}
 <Footer />
         </div>
