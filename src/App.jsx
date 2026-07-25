@@ -5,7 +5,8 @@ import MovieForm from "../components/MovieForm";
 import SearchBar from "../components/SearchBar";
 import MovieList from "../components/MovieList";
 import LandingPage from "./LandingPage";
-import { analyzeMovies } from "./openRouter";
+import { analyzeMovies } from "./groq";
+import DiscoverMovies from "../components/DiscoverMovies";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -42,22 +43,24 @@ function App() {
   );
 
   const handleAnalyze = async () => {
-    if (!movies || movies.length === 0) {
-      setAnalysis("Add some movies first to analyze your taste.");
-      return;
-    }
-    setIsAnalyzing(true);
-    try {
-      const result = await analyzeMovies(movies);
-      const text = result && result.analysis ? result.analysis : JSON.stringify(result);
-      setAnalysis(text);
-    } catch (e) {
-      console.error(e);
-      setAnalysis("Failed to analyze movies. Try again later.");
-    } finally {
-      setIsAnalyzing(false);
-    }
-  };
+  if (movies.length === 0) {
+    alert("Please add some movies first.");
+    return;
+  }
+
+  setIsAnalyzing(true);
+
+  try {
+    const result = await analyzeMovies(movies);
+
+    setAnalysis(result);
+  } catch (error) {
+    console.error("Groq Error:", error);
+    alert(error.message);
+  } finally {
+    setIsAnalyzing(false);
+  }
+};
 // Fixed Structural Return and Correct Layout Framing
 if (!isLoggedIn) {
   return <LandingPage onEnterApp={() => setIsLoggedIn(true)} />;
@@ -68,13 +71,22 @@ if (!isLoggedIn) {
        <Navbar />
        {/*Main Structural Content Workspace Grid */}
        <main className="max-w-6xl mx-auto px-6 py-8 flex-grow w-full flex flex-col gap-6">
-        <div id="home">
-        <MovieForm onAddMovie={addMovie} />
-        <SearchBar searchTerm={searchTerm} onSearch={setSearchTerm} />
-        </div>
+        <div id="home" className="space-y-8">
+  <MovieForm onAddMovie={addMovie} />
+
+  <DiscoverMovies />
+
+  <SearchBar
+    searchTerm={searchTerm}
+    onSearch={setSearchTerm}
+  />
+</div>
         
         <div id="movies">
-<MovieList movies={filteredMovies} onDeleteMovie={deleteMovie} />
+<MovieList
+  movies={filteredMovies}
+  deleteMovie={deleteMovie}
+/>
 </div>
 <div className="flex justify-center my-6">
   <button
@@ -86,13 +98,39 @@ if (!isLoggedIn) {
   </button>
 </div>
 {analysis && (
-  <div id="analysis" className="mt-10 bg-slate-900 p-6 rounded-xl border border-red-500/20 shadow-lg shadow-red-500/50">
-         
-            <h2 className="text-3xl font-bold text-red-300 mb-4">
-              Your Movie Personality
-            </h2>
-            <p className="text-gray-300 leading-relaxed">{analysis}</p>
-          </div>
+  <div
+    id="analysis"
+    className="mt-10 bg-slate-900 p-6 rounded-xl border border-red-500/20 shadow-lg shadow-red-500/50"
+  >
+    <h2 className="text-3xl font-bold text-red-300 mb-6">
+      Your Movie Personality
+    </h2>
+
+    <p className="text-gray-300 leading-relaxed mb-8">
+      {analysis.analysis}
+    </p>
+
+    <h3 className="text-2xl font-bold text-yellow-400 mb-4">
+      AI Recommended Movies
+    </h3>
+
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {analysis.recommended.map((movie, index) => (
+        <div
+          key={index}
+          className="bg-slate-800 rounded-xl p-4 border border-yellow-500/20"
+        >
+          <h4 className="text-xl font-bold text-yellow-300">
+            {movie.title}
+          </h4>
+
+          <p className="text-gray-400 mt-2">
+            {movie.reason}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
 )}
 </main>
 {/* Fixed: Proper JSX comment block syntaxused here */}

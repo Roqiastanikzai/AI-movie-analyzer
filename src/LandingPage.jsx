@@ -16,6 +16,7 @@ function LandingPage({ onEnterApp }) {
   const [showFeatures, setShowFeatures] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
   const [showContact, setShowContact] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#020617] text-white">
@@ -205,15 +206,37 @@ function LandingPage({ onEnterApp }) {
                 <FaArrowRight />
               </div>
             </motion.button>
-
+ 
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => setIsModalOpen(true)}
               className="px-10 py-5 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl font-semibold"
             >
               Learn More
+            
             </motion.button>
-
+             {isModalOpen && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md p-4">
+                <motion.div 
+                initial={{opacity: 0, scale:0.9 }}
+                animate={{opacity:1, scale:1 }}
+                className="bg-zinc-900 border border-white/10 p-8 rounded-3xl max-w-md w-full text-white relative shadow-2xl"
+                >
+                  <h3 className="text-xl font-bold mb-4">About Our Movie Analyzer</h3>
+                   < p className="text-sm text-gray-300 mb-6 leading-relaxed">
+             Uncover the hidden patterns in your viewing habits with our advanced movie analyzer.
+             By evaluating your favorite genres, directors, and emotional resonace, our platform builds a hyper-personalized profile of your exact movie taste to show you precisely
+             what you should watch next.
+             </p>
+             <button 
+             onClick={() => setIsModalOpen(false)}
+             className="w-full py-3 bg-white text-black font-semibold reounded-xl hover:bg-gray-200 transition-colors">
+              Close
+             </button>
+                </motion.div>
+                </div>
+             )}
           </div>
 
           {/* ================= Statistics ================= */}

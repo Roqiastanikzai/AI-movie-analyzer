@@ -3,106 +3,146 @@ import Rating from "./Rating";
 import { searchMovie } from "./pages/services/movieAPI";
 
 function MovieForm({ onAddMovie }) {
-    const [title, setTitle] = useState("");
-    const [review, setReview] = useState("");
-    const [genre, setGenre] = useState("");
-    const [rating, setRating] = useState(0);
-    const [isFetchingPoster, setIsFetchingPoster] = useState(false);
+  const [title, setTitle] = useState("");
+  const [review, setReview] = useState("");
+  const [genre, setGenre] = useState("");
+  const [rating, setRating] = useState(0);
+  const [isFetchingPoster, setIsFetchingPoster] = useState(false);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (
-            title.trim() === "" ||
-            review.trim() === "" ||
-            genre === "" ||
-            rating === 0
-        ) {
-            alert("Please fill all fields.");
-            return;
-        }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-        setIsFetchingPoster(true);
-        const posterInfo = await searchMovie(title);
-        const newMovie = {
-            id: Date.now(),
-            title: posterInfo?.title || title,
-            review,
-            genre,
-            rating,
-            poster: posterInfo?.poster || "",
-        };
-        onAddMovie(newMovie);
-        setTitle("");
-        setReview("");
-        setGenre("");
-        setRating(0);
-        setIsFetchingPoster(false);
+    if (
+      title.trim() === "" ||
+      review.trim() === "" ||
+      genre === "" ||
+      rating === 0
+    ) {
+      alert("Please fill all fields.");
+      return;
+    }
+
+    setIsFetchingPoster(true);
+
+    const movieData = await searchMovie(title);
+
+    const newMovie = {
+      id: Date.now(),
+      title: movieData?.title || title,
+      review,
+      genre,
+      rating,
+      poster: movieData?.poster || "",
+      year: movieData?.year || "",
+      imdbRating: movieData?.imdbRating || "",
+      plot: movieData?.plot || "",
+      director: movieData?.director || "",
+      actors: movieData?.actors || "",
+      runtime: movieData?.runtime || "",
+      language: movieData?.language || "",
     };
 
-    return (
-        <div className="max-w-3xl mx-auto bg-zinc-900/80 backdrop-blur-md border border-red-400/70 rounded-2xl shadow-xl shadow-red-500/20 p-8 mt-8">
-            <h2 className="text-3xl font-bold text-red-300 text-center mb-6">Add a Movie</h2>
-            <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                    <label className="block text-yellow-300 mb-2">Movie Title</label>
-                    <input
-                        type="text"
-                        placeholder="Enter movie Title"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        className="w-full p-3 rounded-lg bg-black border border-gray-700 text-white focus:border-yellow-400 outline-none"
-                    />
-                </div>
+    onAddMovie(newMovie);
 
-                <div>
-                    <label className="block text-yellow-300 mb-2">Your Review</label>
-                    <textarea
-                        rows="5"
-                        placeholder="Write your review..."
-                        value={review}
-                        onChange={(e) => setReview(e.target.value)}
-                        className="w-full p-3 rounded-lg bg-black border border-gray-700 text-white focus:border-yellow-400 outline-none resize-none"
-                    />
-                </div>
+    setTitle("");
+    setReview("");
+    setGenre("");
+    setRating(0);
+    setIsFetchingPoster(false);
+  };
 
-                <div>
-                    <label className="block text-yellow-300 mb-2">Genre</label>
-                    <select
-                        value={genre}
-                        onChange={(e) => setGenre(e.target.value)}
-                        className="w-full p-3 rounded-lg bg-black border border-gray-700 text-white focus:border-yellow-400 outline-none"
-                    >
-                        <option value="">Select Genre</option>
-                        <option>Action</option>
-                        <option>Adventure</option>
-                        <option>Animation</option>
-                        <option>Comedy</option>
-                        <option>Crime</option>
-                        <option>Drama</option>
-                        <option>Fantasy</option>
-                        <option>Horror</option>
-                        <option>Mystery</option>
-                        <option>Romance</option>
-                        <option>Sci-fi</option>
-                        <option>Thriller</option>
-                    </select>
-                </div>
+  return (
+    <div className="max-w-4xl mx-auto bg-zinc-900/80 backdrop-blur-xl border border-red-500/40 rounded-3xl p-8 shadow-2xl">
 
-                <div>
-                    <label className="block text-yellow-300 mb-2">Rating</label>
-                    <Rating rating={rating} setRating={setRating} />
-                </div>
+      <h2 className="text-4xl font-black text-center bg-gradient-to-r from-red-500 via-yellow-400 to-purple-500 bg-clip-text text-transparent mb-8">
+        Add a Movie
+      </h2>
 
-                <button
-                    type="submit"
-                    disabled={isFetchingPoster}
-                    className="w-full bg-gradient-to-r from-red-500 to-yellow-500 text-black font-bold py-3 rounded-lg hover:from-red-400 hover:to-yellow-400 hover:shadow-lg hover:shadow-red-500/50 transition-all duration-300 disabled:opacity-70"
-                >
-                    {isFetchingPoster ? "Fetching poster..." : "Add Movie"}
-                </button>
-            </form>
+      <form onSubmit={handleSubmit} className="space-y-6">
+
+        {/* Movie Title */}
+        <div>
+          <label className="block text-yellow-400 mb-2 font-semibold">
+            Movie Title
+          </label>
+
+          <input
+            type="text"
+            placeholder="Enter movie title..."
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="w-full p-4 rounded-xl bg-black border border-zinc-700 text-white focus:border-yellow-400 outline-none"
+          />
         </div>
-    );
+
+        {/* Review */}
+        <div>
+          <label className="block text-yellow-400 mb-2 font-semibold">
+            Your Review
+          </label>
+
+          <textarea
+            rows="5"
+            value={review}
+            onChange={(e) => setReview(e.target.value)}
+            placeholder="Write your review..."
+            className="w-full p-4 rounded-xl bg-black border border-zinc-700 text-white resize-none focus:border-yellow-400 outline-none"
+          />
+        </div>
+
+        {/* Genre */}
+        <div>
+          <label className="block text-yellow-400 mb-2 font-semibold">
+            Genre
+          </label>
+
+          <select
+            value={genre}
+            onChange={(e) => setGenre(e.target.value)}
+            className="w-full p-4 rounded-xl bg-black border border-zinc-700 text-white focus:border-yellow-400 outline-none"
+          >
+            <option value="">Select Genre</option>
+
+            <option>Action</option>
+            <option>Adventure</option>
+            <option>Animation</option>
+            <option>Comedy</option>
+            <option>Crime</option>
+            <option>Drama</option>
+            <option>Fantasy</option>
+            <option>Horror</option>
+            <option>Mystery</option>
+            <option>Romance</option>
+            <option>Sci-fi</option>
+            <option>Thriller</option>
+          </select>
+        </div>
+
+        {/* Rating */}
+        <div>
+          <label className="block text-yellow-400 mb-2 font-semibold">
+            Your Rating
+          </label>
+
+          <Rating
+            rating={rating}
+            setRating={setRating}
+          />
+        </div>
+
+        {/* Button */}
+        <button
+          type="submit"
+          disabled={isFetchingPoster}
+          className="w-full py-4 rounded-xl bg-gradient-to-r from-red-500 via-purple-500 to-yellow-500 font-bold text-white hover:scale-[1.02] transition duration-300"
+        >
+          {isFetchingPoster ? "Fetching Movie..." : "Add Movie"}
+        </button>
+
+      </form>
+
+    </div>
+  );
 }
 
 export default MovieForm;
