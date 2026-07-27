@@ -68,7 +68,7 @@ if (!isLoggedIn) {
   return (
     <div className="min-h-screen bg-slate-950 text-white flex flex-col justify-between">
       {/*3D Multi-color Navbar sitting firmly at the top edge */}
-       <Navbar />
+       <Navbar onGoHome={() => setIsLoggedIn(false)} />
        {/*Main Structural Content Workspace Grid */}
        <main className="max-w-6xl mx-auto px-6 py-8 flex-grow w-full flex flex-col gap-6">
         <div id="home" className="space-y-8">

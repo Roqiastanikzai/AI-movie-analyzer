@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaFilm } from "react-icons/fa";
-function Navbar() { 
+function Navbar({onGoHome}) { 
     const [activeTab, setActiveTab] = useState("home");
     return (
         <nav className="sticky top-0 z-50 
@@ -9,6 +9,12 @@ function Navbar() {
         border-b-5 border-transparent
          shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
          >
+            <button
+  onClick={onGoHome}
+  className="px-4 py-2 rounded-lg bg-gradient-to-r from-red-500 to-yellow-500 text-black font-bold hover:scale-105 transition"
+>
+  🏠 Landing Page
+</button>
             {/* 3D Multi-color neon accent line at the very bottom */}
             <div className=" absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r  from-red-500 via-purple-500 via-indigo-500 via-cyan-500 to-yellow-500 animate-gradient bg-[length:200%_auto]"></div>
                 <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
