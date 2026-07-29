@@ -29,7 +29,7 @@ Do not include explanations, markdown, or code blocks.
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "llama-3.3-70b-versatile",
+        model: "inclusionai/ling-3.0-flash:free",
         messages: [
           {
             role: "user",

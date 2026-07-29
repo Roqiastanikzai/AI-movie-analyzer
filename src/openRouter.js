@@ -44,7 +44,7 @@ export async function analyzeMovies(movies) {
                 "Content-Type":"application/json",
             },
             body: JSON.stringify({
-                model:"google/gemma-4-31b-it:free",
+                model:"inclusionai/ling-3.0-flash:free",
                 messages:[{
                     role:"user",
                     content:prompt,
