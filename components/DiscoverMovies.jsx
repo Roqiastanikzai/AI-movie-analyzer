@@ -8,19 +8,14 @@ function DiscoverMovies() {
   const [genre, setGenre] = useState("Action");
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
-
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   const discoverMovies = async () => {
     setLoading(true);
 
     try {
-      // Ask AI for movie titles
       const movieTitles = await recommendMoviesByGenre(genre);
-
-      // Fetch posters/details from OMDb
       const movieData = await searchMovies(movieTitles);
-
       setMovies(movieData);
     } catch (err) {
       console.error(err);
@@ -31,18 +26,16 @@ function DiscoverMovies() {
   };
 
   return (
-    <section className="my-16">
-
-      <h2 className="text-4xl font-black text-center mb-10 bg-gradient-to-r from-red-500 via-purple-500 to-yellow-400 bg-clip-text text-transparent">
+    <section className="my-8 sm:my-12 lg:my-16">
+      <h2 className="mb-8 bg-gradient-to-r from-red-500 via-purple-500 to-yellow-400 bg-clip-text text-center text-3xl font-black text-transparent sm:text-4xl lg:text-5xl">
         Discover Movies with AI
       </h2>
 
-      <div className="flex flex-wrap justify-center gap-4 mb-8">
-
+      <div className="mb-8 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
         <select
           value={genre}
           onChange={(e) => setGenre(e.target.value)}
-          className="bg-zinc-900 border border-yellow-500 rounded-xl px-5 py-3 text-white"
+          className="w-full rounded-xl border border-yellow-500 bg-zinc-900 px-4 py-3 text-white sm:max-w-[220px]"
         >
           <option>Action</option>
           <option>Adventure</option>
@@ -60,65 +53,39 @@ function DiscoverMovies() {
 
         <button
           onClick={discoverMovies}
-          className="bg-gradient-to-r from-red-500 via-purple-500 to-yellow-500 px-6 py-3 rounded-xl font-bold flex items-center gap-2"
+          className="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-red-500 via-purple-500 to-yellow-500 px-5 py-3 font-bold transition hover:scale-[1.01]"
         >
           <FaMagic />
           Discover Movies
         </button>
-
       </div>
 
-      {loading && (
-        <h3 className="text-center text-yellow-400 text-xl">
-          AI is discovering movies...
-        </h3>
-      )}
+      {loading && <h3 className="text-center text-xl text-yellow-400">AI is discovering movies...</h3>}
 
-      <div className="grid md:grid-cols-4 gap-8">
-
+      <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
         {movies.map((movie) => (
-
           <div
             key={movie.title}
-            className="bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-700 hover:border-yellow-400 transition"
+            className="overflow-hidden rounded-2xl border border-zinc-700 bg-zinc-900 transition hover:border-yellow-400"
           >
-
-            <img
-              src={movie.poster}
-              alt={movie.title}
-              className="h-96 w-full object-cover"
-            />
+            <img src={movie.poster} alt={movie.title} className="h-80 w-full object-cover sm:h-72 lg:h-80" />
 
             <div className="p-4">
-
-              <h3 className="text-xl font-bold mb-2">
-                {movie.title}
-              </h3>
-
-              <p className="text-gray-400 mb-4">
-                ⭐ {movie.imdbRating}
-              </p>
+              <h3 className="mb-2 text-lg font-bold sm:text-xl">{movie.title}</h3>
+              <p className="mb-4 text-gray-400">⭐ {movie.imdbRating}</p>
 
               <button
                 onClick={() => setSelectedMovie(movie)}
-                className="w-full py-3 rounded-xl bg-gradient-to-r from-red-500 via-purple-500 to-yellow-500 font-bold"
+                className="w-full rounded-xl bg-gradient-to-r from-red-500 via-purple-500 to-yellow-500 py-3 font-bold"
               >
                 View Details
               </button>
-
             </div>
-
           </div>
-
         ))}
-
       </div>
 
-      <MovieModal
-        movie={selectedMovie}
-        onClose={() => setSelectedMovie(null)}
-      />
-
+      <MovieModal movie={selectedMovie} onClose={() => setSelectedMovie(null)} />
     </section>
   );
 }

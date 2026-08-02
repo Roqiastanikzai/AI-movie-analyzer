@@ -17,77 +17,41 @@ function LandingNavbar({ onEnterApp }) {
       initial={{ y: -80 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.7 }}
-      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-black/30 border-b border-white/10"
+      className="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-black/30 backdrop-blur-xl"
     >
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-
-        {/* Logo */}
-
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-3 py-3 sm:px-5 lg:px-6">
         <div className="flex items-center gap-3">
-
-          <div className="w-11 h-11 rounded-full bg-gradient-to-r from-red-500 via-purple-500 to-yellow-400 flex items-center justify-center">
-
-            <FaRobot className="text-black text-xl" />
-
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-red-500 via-purple-500 to-yellow-400 sm:h-11 sm:w-11">
+            <FaRobot className="text-lg text-black sm:text-xl" />
           </div>
 
           <div>
-
-            <h1 className="text-xl font-black text-white">
-              AI Movie Analyzer
-            </h1>
-
-            <p className="text-xs text-gray-400">
-              Smart Movie Companion
-            </p>
-
+            <h1 className="text-sm font-black text-white sm:text-xl">AI Movie Analyzer</h1>
+            <p className="text-[10px] text-gray-400 sm:text-xs">Smart Movie Companion</p>
           </div>
-
         </div>
 
-        {/* Navigation */}
-
-        <div className="hidden md:flex items-center gap-10">
-
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="text-gray-300 hover:text-yellow-400 transition font-semibold"
-          >
+        <div className="hidden items-center gap-6 md:flex">
+          <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="font-semibold text-gray-300 transition hover:text-yellow-400">
             Home
           </button>
-
-          <button
-            onClick={() => scrollToSection("features")}
-            className="text-gray-300 hover:text-yellow-400 transition font-semibold"
-          >
+          <button onClick={() => scrollToSection("features")} className="font-semibold text-gray-300 transition hover:text-yellow-400">
             Features
           </button>
-
-          <button
-            onClick={() => scrollToSection("about")}
-            className="text-gray-300 hover:text-yellow-400 transition font-semibold"
-          >
+          <button onClick={() => scrollToSection("about")} className="font-semibold text-gray-300 transition hover:text-yellow-400">
             About
           </button>
-
-          <button
-            onClick={() => scrollToSection("contact")}
-            className="text-gray-300 hover:text-yellow-400 transition font-semibold"
-          >
+          <button onClick={() => scrollToSection("contact")} className="font-semibold text-gray-300 transition hover:text-yellow-400">
             Contact
           </button>
-
         </div>
-
-        {/* Go To Project Button */}
 
         <button
           onClick={onEnterApp}
-          className="px-6 py-3 rounded-full bg-gradient-to-r from-red-500 via-purple-500 to-yellow-500 text-black font-bold hover:scale-105 transition-all duration-300 shadow-lg"
+          className="rounded-full bg-gradient-to-r from-red-500 via-purple-500 to-yellow-500 px-3 py-2 text-xs font-bold text-black shadow-lg transition hover:scale-105 sm:px-5 sm:py-3 sm:text-sm"
         >
-          Go To Project
+          Open App
         </button>
-
       </div>
     </motion.nav>
   );
