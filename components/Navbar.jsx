@@ -25,7 +25,7 @@ function Navbar({ currentPage, onNavigate, onGoHome }) {
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2 sm:gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:justify-end sm:gap-3 lg:gap-4">
             {navItems.map((item) => (
               <button
                 key={item.key}
@@ -37,7 +37,7 @@ function Navbar({ currentPage, onNavigate, onGoHome }) {
                   }
                   onNavigate(item.key);
                 }}
-                className={`cursor-pointer rounded-full px-3 py-2 text-xs tracking-wide transition-all duration-300 sm:px-4 sm:text-sm ${
+                className={`cursor-pointer rounded-full px-2.5 py-2 text-[10px] tracking-wide transition-all duration-300 sm:px-3 sm:text-xs lg:px-4 lg:text-sm ${
                   currentPage === item.key
                     ? item.key === "contact"
                       ? "scale-105 border border-pink-500/40 bg-gradient-to-r from-pink-500/20 via-purple-500/20 to-orange-500/20 text-white shadow-[0_0_15px_rgba(236,72,153,0.4)]"

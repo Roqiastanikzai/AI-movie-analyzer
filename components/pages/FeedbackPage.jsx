@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const ratingLabels = [
   "Poor",
@@ -7,6 +7,8 @@ const ratingLabels = [
   "Very Good",
   "Excellent",
 ];
+
+const STORAGE_KEY = "ai-movie-analyzer-feedback";
 
 function FeedbackPage() {
   const [formData, setFormData] = useState({
@@ -17,6 +19,17 @@ function FeedbackPage() {
     category: "Overall Experience",
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [savedCount, setSavedCount] = useState(0);
+
+  useEffect(() => {
+    try {
+      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      setSavedCount(Array.isArray(stored) ? stored.length : 0);
+    } catch (error) {
+      console.error("Unable to read saved feedback:", error);
+      setSavedCount(0);
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,42 +39,66 @@ function FeedbackPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const subject = encodeURIComponent(`App feedback from ${formData.name || "a user"}`);
-    const body = encodeURIComponent(
-      `Name: ${formData.name || "Not provided"}\n` +
-        `Email: ${formData.email || "Not provided"}\n` +
-        `Rating: ${formData.rating}/5 (${ratingLabels[formData.rating - 1] || "Excellent"})\n` +
-        `Category: ${formData.category}\n\n` +
-        `Feedback:\n${formData.feedback}`
-    );
+    if (!formData.feedback.trim()) {
+      alert("Please write your feedback before submitting.");
+      return;
+    }
 
-    window.location.href = `mailto:roqiastanikzai5@gmail.com?subject=${subject}&body=${body}`;
+    const submission = {
+      id: Date.now(),
+      name: formData.name || "Anonymous",
+      email: formData.email || "Not provided",
+      rating: formData.rating,
+      category: formData.category,
+      feedback: formData.feedback.trim(),
+      createdAt: new Date().toISOString(),
+    };
+
+    try {
+      const existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      const list = Array.isArray(existing) ? existing : [];
+      const updatedList = [submission, ...list];
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedList));
+      setSavedCount(updatedList.length);
+    } catch (error) {
+      console.error("Unable to store feedback:", error);
+      alert("Your feedback could not be saved right now. Please try again.");
+      return;
+    }
+
+    setFormData({
+      name: "",
+      email: "",
+      rating: 5,
+      feedback: "",
+      category: "Overall Experience",
+    });
     setIsSubmitted(true);
   };
 
   return (
-    <div className="mx-auto w-full max-w-5xl px-4 py-10">
-      <div className="overflow-hidden rounded-[32px] border border-white/10 bg-slate-900/70 shadow-[0_25px_80px_rgba(0,0,0,0.45)] backdrop-blur-sm">
-        <div className="border-b border-white/10 bg-gradient-to-r from-red-500/10 via-purple-500/10 to-yellow-500/10 px-6 py-8 sm:px-10">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-yellow-400">
+    <div className="mx-auto w-full max-w-5xl px-3 py-6 sm:px-4 sm:py-8 lg:px-6 lg:py-10">
+      <div className="overflow-hidden rounded-[28px] border border-white/10 bg-slate-900/70 shadow-[0_25px_80px_rgba(0,0,0,0.45)] backdrop-blur-sm sm:rounded-[32px]">
+        <div className="border-b border-white/10 bg-gradient-to-r from-red-500/10 via-purple-500/10 to-yellow-500/10 px-4 py-6 sm:px-8 lg:px-10 lg:py-8">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-yellow-400 sm:text-sm">
             Your Voice Matters
           </p>
-          <h1 className="text-3xl font-black text-white sm:text-5xl">Feedback & Reviews</h1>
+          <h1 className="text-2xl font-black text-white sm:text-4xl lg:text-5xl">Feedback & Reviews</h1>
           <p className="mt-3 max-w-2xl text-sm text-slate-300 sm:text-base">
             Tell me what you love, what can improve, and how you feel about the app experience.
           </p>
         </div>
 
-        <div className="grid gap-8 px-6 py-8 sm:px-10 lg:grid-cols-[1.1fr_1.4fr]">
-          <div className="rounded-3xl border border-white/10 bg-slate-950/50 p-6">
-            <h2 className="text-xl font-bold text-white">Rate the app</h2>
-            <div className="mt-6 flex items-center gap-3">
+        <div className="grid gap-6 px-4 py-6 sm:px-8 lg:grid-cols-[1.05fr_1.4fr] lg:gap-8 lg:px-10 lg:py-8">
+          <div className="rounded-3xl border border-white/10 bg-slate-950/50 p-4 sm:p-5 lg:p-6">
+            <h2 className="text-lg font-bold text-white sm:text-xl">Rate the app</h2>
+            <div className="mt-5 flex items-center gap-2 sm:gap-3">
               {[1, 2, 3, 4, 5].map((star) => (
                 <button
                   key={star}
                   type="button"
                   onClick={() => setFormData((prev) => ({ ...prev, rating: star }))}
-                  className={`text-3xl transition-transform hover:scale-110 ${
+                  className={`text-2xl transition-transform hover:scale-110 sm:text-3xl ${
                     star <= formData.rating ? "text-yellow-400" : "text-slate-600"
                   }`}
                   aria-label={`Rate ${star} out of 5`}
@@ -70,23 +107,26 @@ function FeedbackPage() {
                 </button>
               ))}
             </div>
-            <div className="mt-4 rounded-2xl border border-yellow-400/30 bg-yellow-500/10 px-4 py-3 text-sm text-yellow-200">
+            <div className="mt-4 rounded-2xl border border-yellow-400/30 bg-yellow-500/10 px-3 py-3 text-sm text-yellow-200 sm:px-4">
               {formData.rating}/5 - {ratingLabels[formData.rating - 1] || "Excellent"}
             </div>
 
-            <div className="mt-8 space-y-4 text-sm text-slate-300">
+            <div className="mt-6 space-y-4 text-sm text-slate-300">
               <div>
                 <p className="font-semibold text-white">Why feedback matters</p>
-                <p className="mt-1">It helps me improve the app experience, usability, and recommendations.</p>
+                <p className="mt-1">It helps improve the app experience, usability, and recommendations.</p>
               </div>
               <div>
-                <p className="font-semibold text-white">Need a quick reply?</p>
-                <p className="mt-1">You can also send direct feedback by email through this form.</p>
+                <p className="font-semibold text-white">Submit directly</p>
+                <p className="mt-1">Your feedback is saved from this form without opening an email app.</p>
+              </div>
+              <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/5 px-3 py-2 text-emerald-300">
+                Saved submissions: {savedCount}
               </div>
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-5 rounded-3xl border border-white/10 bg-slate-950/40 p-6">
+          <form onSubmit={handleSubmit} className="space-y-5 rounded-3xl border border-white/10 bg-slate-950/40 p-4 sm:p-5 lg:p-6">
             <div className="grid gap-5 sm:grid-cols-2">
               <label className="block text-sm font-medium text-slate-200">
                 Full Name
@@ -146,13 +186,13 @@ function FeedbackPage() {
             <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between">
               <button
                 type="submit"
-                className="rounded-full bg-gradient-to-r from-red-500 via-purple-500 to-yellow-500 px-6 py-3 text-sm font-bold text-black shadow-xl transition hover:scale-[1.02]"
+                className="w-full rounded-full bg-gradient-to-r from-red-500 via-purple-500 to-yellow-500 px-6 py-3 text-sm font-bold text-black shadow-xl transition hover:scale-[1.02] sm:w-auto"
               >
                 Send Feedback
               </button>
 
               {isSubmitted && (
-                <span className="text-sm text-emerald-400">Your email app is opening with your feedback.</span>
+                <span className="text-sm text-emerald-400">Thanks! Your feedback has been saved successfully.</span>
               )}
             </div>
           </form>

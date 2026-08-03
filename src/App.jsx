@@ -221,7 +221,7 @@ function App() {
         onGoHome={() => setIsLoggedIn(false)}
       />
 
-      <main className="mx-auto flex w-full max-w-6xl flex-grow flex-col gap-6 px-3 py-6 sm:px-5 lg:px-6">
+      <main className="mx-auto flex w-full max-w-[90rem] flex-grow flex-col gap-5 px-2 py-5 sm:px-4 sm:py-6 lg:px-6 lg:py-8">
         {renderPage()}
       </main>
 
