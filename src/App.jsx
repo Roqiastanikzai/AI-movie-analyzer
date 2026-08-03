@@ -9,6 +9,7 @@ import { analyzeMovies } from "./groq";
 import DiscoverMovies from "../components/DiscoverMovies";
 import FeatureSection from "../components/landing/FeatureSection";
 import AboutSection from "../components/landing/AboutSection";
+import FeedbackPage from "../components/pages/FeedbackPage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -144,6 +145,8 @@ function App() {
             )}
           </div>
         );
+      case "feedback":
+        return <FeedbackPage />;
       case "about":
         return (
           <div className="w-full px-4 py-10">
