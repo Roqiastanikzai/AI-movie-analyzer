@@ -15,22 +15,43 @@ function Footer() {
           </span>
         </p>
 
-        <div className="flex w-full max-w-xl flex-col items-center gap-3 rounded-2xl border border-slate-800 bg-slate-950/60 px-4 py-4 shadow-[inset_0_2px_4px_rgba(0,0,0,0.6),0_1px_6px_rgba(255,255,255,0.05)] sm:flex-row sm:justify-center sm:gap-8 sm:px-6">
-          <p className="text-sm text-gray-400 sm:text-base">
-            Email:{" "}
-            <a href="mailto:roqiastanikzai5@gmail.com" className="font-bold text-yellow-400 transition hover:underline">
-              roqiastanikzai5@gmail.com
-            </a>
-          </p>
+        <div className="flex w-full max-w-2xl flex-col items-center gap-3 rounded-2xl border border-slate-800 bg-slate-950/60 px-4 py-4 shadow-[inset_0_2px_4px_rgba(0,0,0,0.6),0_1px_6px_rgba(255,255,255,0.05)] sm:px-6">
+          <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-8">
+            <p className="text-sm text-gray-400 sm:text-base">
+              Email:{" "}
+              <a href="mailto:roqiastanikzai5@gmail.com" className="font-bold text-yellow-400 transition hover:underline">
+                roqiastanikzai5@gmail.com
+              </a>
+            </p>
 
-          <div className="hidden h-4 w-[1px] bg-slate-800 sm:block" />
+            <div className="hidden h-4 w-[1px] bg-slate-800 sm:block" />
 
-          <p className="text-sm text-gray-400 sm:text-base">
-            Phone:{" "}
-            <a href="tel:0764927235" className="font-bold text-yellow-400 transition hover:underline">
-              0764927235
+            <p className="text-sm text-gray-400 sm:text-base">
+              Phone:{" "}
+              <a href="tel:0764927235" className="font-bold text-yellow-400 transition hover:underline">
+                0764927235
+              </a>
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-4 pt-2 text-sm">
+            <a
+              href="https://github.com/Roqiastanikzai"
+              target="_blank"
+              rel="noreferrer"
+              className="font-semibold text-cyan-300 transition hover:text-cyan-200 hover:underline"
+            >
+              GitHub Profile
             </a>
-          </p>
+            <a
+              href="https://yagankar.com/profiles/Roqiastanikzai5"
+              target="_blank"
+              rel="noreferrer"
+              className="font-semibold text-violet-300 transition hover:text-violet-200 hover:underline"
+            >
+              Yagankar Profile
+            </a>
+          </div>
         </div>
       </div>
     </footer>

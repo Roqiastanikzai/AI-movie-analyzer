@@ -19,18 +19,13 @@ function MovieForm({ onAddMovie }) {
 
     setIsFetchingPoster(true);
 
-    const movieData = (await searchMovie(title)) || {
-      title,
-      year: "2024",
-      poster: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=800&q=80",
-      imdbRating: "8.5",
-      genre,
-      plot: "Movie details unavailable. This is a placeholder poster.",
-      director: "Unknown",
-      actors: "Unknown",
-      runtime: "N/A",
-      language: "English",
-    };
+    const movieData = await searchMovie(title);
+
+    if (!movieData) {
+      alert("This movie doesn't exist in OMDb. Please check the title and try again.");
+      setIsFetchingPoster(false);
+      return;
+    }
 
     const newMovie = {
       id: Date.now(),

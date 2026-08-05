@@ -3,11 +3,12 @@ import { FaFilm } from "react-icons/fa";
 function Navbar({ currentPage, onNavigate, onGoHome }) {
   const navItems = [
     { key: "home", label: "Home" },
-    { key: "contact", label: "Contact" },
-    { key: "features", label: "Features" },
     { key: "movies", label: "My Movies" },
+    { key: "discover", label: "Discover My Movies" },
+    { key: "features", label: "Features" },
     { key: "feedback", label: "Feedback" },
     { key: "about", label: "About" },
+    { key: "contact", label: "Contact" },
   ];
 
   return (
@@ -45,11 +46,13 @@ function Navbar({ currentPage, onNavigate, onGoHome }) {
                         ? "scale-105 border border-yellow-500/40 bg-gradient-to-r from-yellow-500/20 via-orange-500/20 to-red-500/20 text-white shadow-[0_0_15px_rgba(234,179,8,0.35)]"
                         : item.key === "movies"
                           ? "scale-105 border border-indigo-500/40 bg-gradient-to-r from-purple-500/20 via-indigo-500/20 to-cyan-500/20 text-white shadow-[0_0_15px_rgba(99,102,241,0.4)]"
-                          : item.key === "feedback"
-                            ? "scale-105 border border-amber-500/40 bg-gradient-to-r from-amber-500/20 via-orange-500/20 to-red-500/20 text-white shadow-[0_0_15px_rgba(251,191,36,0.35)]"
-                            : item.key === "about"
-                              ? "scale-105 border border-emerald-500/40 bg-gradient-to-r from-emerald-500/20 via-cyan-500/20 to-blue-500/20 text-white shadow-[0_0_15px_rgba(16,185,129,0.35)]"
-                              : "scale-105 border border-purple-500/40 bg-gradient-to-r from-red-500/20 via-purple-500/20 to-indigo-500/20 text-white shadow-[0_0_15px_rgba(168,85,247,0.4)]"
+                          : item.key === "discover"
+                            ? "scale-105 border border-cyan-500/40 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-indigo-500/20 text-white shadow-[0_0_15px_rgba(34,211,238,0.35)]"
+                            : item.key === "feedback"
+                              ? "scale-105 border border-amber-500/40 bg-gradient-to-r from-amber-500/20 via-orange-500/20 to-red-500/20 text-white shadow-[0_0_15px_rgba(251,191,36,0.35)]"
+                              : item.key === "about"
+                                ? "scale-105 border border-emerald-500/40 bg-gradient-to-r from-emerald-500/20 via-cyan-500/20 to-blue-500/20 text-white shadow-[0_0_15px_rgba(16,185,129,0.35)]"
+                                : "scale-105 border border-purple-500/40 bg-gradient-to-r from-red-500/20 via-purple-500/20 to-indigo-500/20 text-white shadow-[0_0_15px_rgba(168,85,247,0.4)]"
                     : "text-gray-300 hover:bg-slate-800/40 hover:text-white"
                 }`}
               >

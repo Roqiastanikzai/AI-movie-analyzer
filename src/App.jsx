@@ -92,6 +92,20 @@ function App() {
             <FeatureSection />
           </div>
         );
+      case "discover":
+        return (
+          <div className="mx-auto w-full max-w-6xl space-y-8 px-4 py-10">
+            <div className="rounded-3xl border border-cyan-500/20 bg-slate-900/70 p-6 shadow-[0_20px_50px_rgba(0,0,0,0.35)]">
+              <h1 className="text-center text-3xl font-black text-cyan-300 sm:text-4xl">
+                Discover My Movies
+              </h1>
+              <p className="mt-3 text-center text-sm text-slate-300 sm:text-base">
+                Explore AI-recommended films based on your favorite genres and cinematic taste.
+              </p>
+            </div>
+            <DiscoverMovies />
+          </div>
+        );
       case "movies":
         return (
           <div className="mx-auto w-full max-w-6xl space-y-8 px-4 py-10">
@@ -107,7 +121,6 @@ function App() {
               </button>
             </div>
 
-            <DiscoverMovies />
             <SearchBar searchTerm={searchTerm} onSearch={setSearchTerm} />
             <MovieList movies={filteredMovies} deleteMovie={deleteMovie} />
 
@@ -168,7 +181,6 @@ function App() {
               </button>
             </div>
 
-            <DiscoverMovies />
             <SearchBar searchTerm={searchTerm} onSearch={setSearchTerm} />
             <MovieList movies={filteredMovies} deleteMovie={deleteMovie} />
 
