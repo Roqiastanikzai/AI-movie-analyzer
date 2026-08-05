@@ -53,40 +53,40 @@ function MovieForm({ onAddMovie }) {
   };
 
   return (
-    <div className="mx-auto max-w-4xl rounded-3xl border border-red-500/40 bg-zinc-900/80 p-4 shadow-2xl backdrop-blur-xl sm:p-6 lg:p-8">
-      <h2 className="mb-6 bg-gradient-to-r from-red-500 via-yellow-400 to-purple-500 bg-clip-text text-center text-3xl font-black text-transparent sm:text-4xl">
+    <div className="mx-auto w-full max-w-4xl rounded-3xl border border-red-500/40 bg-zinc-900/80 p-3 shadow-2xl backdrop-blur-xl sm:p-5 lg:p-8">
+      <h2 className="mb-5 bg-gradient-to-r from-red-500 via-yellow-400 to-purple-500 bg-clip-text text-center text-2xl font-black text-transparent sm:mb-6 sm:text-3xl lg:text-4xl">
         Add a Movie
       </h2>
 
-      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
         <div>
-          <label className="mb-2 block font-semibold text-yellow-400">Movie Title</label>
+          <label className="mb-2 block text-sm font-semibold text-yellow-400 sm:text-base">Movie Title</label>
           <input
             type="text"
             placeholder="Enter movie title..."
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full rounded-xl border border-zinc-700 bg-black p-3 text-white outline-none transition focus:border-yellow-400 sm:p-4"
+            className="w-full rounded-xl border border-zinc-700 bg-black p-3 text-sm text-white outline-none transition focus:border-yellow-400 sm:p-4 sm:text-base"
           />
         </div>
 
         <div>
-          <label className="mb-2 block font-semibold text-yellow-400">Your Review</label>
+          <label className="mb-2 block text-sm font-semibold text-yellow-400 sm:text-base">Your Review</label>
           <textarea
             rows="5"
             value={review}
             onChange={(e) => setReview(e.target.value)}
             placeholder="Write your review..."
-            className="w-full resize-none rounded-xl border border-zinc-700 bg-black p-3 text-white outline-none transition focus:border-yellow-400 sm:p-4"
+            className="w-full resize-none rounded-xl border border-zinc-700 bg-black p-3 text-sm text-white outline-none transition focus:border-yellow-400 sm:p-4 sm:text-base"
           />
         </div>
 
         <div>
-          <label className="mb-2 block font-semibold text-yellow-400">Genre</label>
+          <label className="mb-2 block text-sm font-semibold text-yellow-400 sm:text-base">Genre</label>
           <select
             value={genre}
             onChange={(e) => setGenre(e.target.value)}
-            className="w-full rounded-xl border border-zinc-700 bg-black p-3 text-white outline-none transition focus:border-yellow-400 sm:p-4"
+            className="w-full rounded-xl border border-zinc-700 bg-black p-3 text-sm text-white outline-none transition focus:border-yellow-400 sm:p-4 sm:text-base"
           >
             <option value="">Select Genre</option>
             <option>Action</option>
@@ -105,14 +105,14 @@ function MovieForm({ onAddMovie }) {
         </div>
 
         <div>
-          <label className="mb-2 block font-semibold text-yellow-400">Your Rating</label>
+          <label className="mb-2 block text-sm font-semibold text-yellow-400 sm:text-base">Your Rating</label>
           <Rating rating={rating} setRating={setRating} />
         </div>
 
         <button
           type="submit"
           disabled={isFetchingPoster}
-          className="w-full rounded-xl bg-gradient-to-r from-red-500 via-purple-500 to-yellow-500 py-3 font-bold text-white transition duration-300 hover:scale-[1.01] sm:py-4"
+          className="w-full rounded-xl bg-gradient-to-r from-red-500 via-purple-500 to-yellow-500 py-3 text-sm font-bold text-white transition duration-300 hover:scale-[1.01] sm:py-4 sm:text-base"
         >
           {isFetchingPoster ? "Fetching Movie..." : "Add Movie"}
         </button>

@@ -22,6 +22,7 @@
 html {
   scroll-behavior: smooth;
   width: 100%;
+  min-width: 320px;
 }
 
 body {
@@ -40,6 +41,16 @@ body {
 #root {
   min-height: 100vh;
   width: 100%;
+  min-width: 0;
+}
+
+main,
+section,
+article,
+header,
+footer,
+nav {
+  min-width: 0;
 }
 
 img {
@@ -141,5 +152,15 @@ select:focus {
 @media (max-width: 640px) {
   body {
     background-attachment: scroll;
+  }
+
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 360px) {
+  html {
+    font-size: 14px;
   }
 }
